@@ -61,6 +61,7 @@ page 65001 EmployeesList6
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Phone No. field.';
                     Caption = 'Phone No.';
+                    ExtendedDatatype = PhoneNo;
                 }
                 field(City; Rec.City)
                 {
@@ -109,6 +110,7 @@ page 65001 EmployeesList6
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the E-mail field.';
                     Caption = 'E-mail';
+                    ExtendedDatatype = EMail;
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {

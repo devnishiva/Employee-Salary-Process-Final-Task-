@@ -3,8 +3,8 @@ report 65001 "Salary Process  Report6"
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    Caption = 'Salary Process  Report6';
-    RDLCLayout = './Salary Process  Report6.rdl';
+    Caption = 'Salary Process Report';
+    RDLCLayout = './Salary Process Report.rdl';
 
     dataset
     {
@@ -54,9 +54,37 @@ report 65001 "Salary Process  Report6"
             {
 
             }
+            column(Companypic; Company.Picture)
+            {
+
+            }
+            column(CompanyName; Company.Name)
+            {
+
+            }
+            column(CompanyAddress; Company.Address)
+            {
+
+            }
+            column(CompanyPhnNo; Company."Phone No.")
+            {
+
+            }
+            column(CompanyFaxNo; Company."Fax No.")
+            {
+
+            }
+            column(CompanyEmail; Company."E-Mail")
+            {
+
+            }
+            column(CompanyTelex; Company."Telex No.")
+            {
+
+            }
             dataitem("Salary Process Line6"; "Salary Process Line6")
             {
-                DataItemLinkReference = "Salary Process Header6";
+                //DataItemLinkReference = "Salary Process Header6";
                 DataItemLink = "Document No." = field("No.");
                 column(Document_No_; "Document No.")
                 {
@@ -87,4 +115,5 @@ report 65001 "Salary Process  Report6"
     var
         myInt: Integer;
         Company: Record "Company Information";
+
 }

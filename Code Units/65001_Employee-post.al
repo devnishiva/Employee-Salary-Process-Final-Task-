@@ -40,6 +40,7 @@ codeunit 65001 "Salary Process ledger6"
                 postedsalprocline.Insert();
             until salaryprocline.Next() = 0;
         Rec := salaryProcheader;
+        salaryprocline.DeleteAll();
     end;
 
     procedure initsalaryprocessledger(salaryheader: Record "Salary Process Header6")
@@ -67,7 +68,7 @@ codeunit 65001 "Salary Process ledger6"
                 salaryled.Year := salaryprocline.year;
                 salaryled.Insert();
             until salaryprocline.Next() = 0;
-        Message('The Record Has been Inserted');
+        //Message('The Record Has been Inserted');
     end;
 
     var

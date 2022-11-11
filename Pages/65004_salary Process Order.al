@@ -10,11 +10,9 @@ page 65004 "Salary Process Order6"
         {
             group(General)
             {
-                
-                
+                Editable = Fieldeditable;
                 field("No."; Rec."No.")
                 {
-                    Enabled = editable;
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.';
                     Caption = 'No.';
@@ -93,7 +91,6 @@ page 65004 "Salary Process Order6"
                 }
                 field(Status; Rec.Status)
                 {
-                    Enabled =editable;
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Status field.';
                     Caption = 'Status';
@@ -127,9 +124,9 @@ page 65004 "Salary Process Order6"
                 ApplicationArea = All;
                 Caption = 'post';
                 trigger OnAction()
-                var  
+                var
                     initsalaryledger: Codeunit "Salary Process ledger6";
-                    postedsalPro :Record "Posted Salary Process Header6";
+                    postedsalPro: Record "Posted Salary Process Header6";
 
                 begin
                     initsalaryledger.initsalaryprocessledger(Rec);
@@ -149,7 +146,9 @@ page 65004 "Salary Process Order6"
                 ToolTip = 'Executes the Released action.';
 
                 trigger OnAction()
-                begin 
+                begin
+                    Rec.Status := Rec.Status::Released;
+                    Rec.Modify();
                 end;
             }
             action(Reopen)
@@ -163,6 +162,8 @@ page 65004 "Salary Process Order6"
                 ToolTip = 'Executes the Reopen action.';
                 trigger OnAction()
                 begin
+                     Rec.Status := Rec.Status::Open;
+                    Rec.Modify();
                 end;
             }
             action(Print)
@@ -207,31 +208,40 @@ page 65004 "Salary Process Order6"
                     payelement.Reset();
                     payelement.SetCurrentKey("Effective Date");
                     payelement.SetRange("Employee No.", Rec."Employee No.");
-                    payelement.SetFilter("Effective Date",'<%1',salaryheader."Posting Date");
+                    payelement.SetFilter("Effective Date", '<%1', Rec."Posting Date");
                     if payelement.FindLast() then;
-                    
+
                     payelement1.Reset();
-                    payelement1.SetRange("Employee No.", Rec."Employee No."); 
-                    payelement1.SetRange("Effective Date",payelement."Effective Date");
-                    if payelement.FindSet() then
-                    
+                    payelement1.SetRange("Employee No.", Rec."Employee No.");
+                    payelement1.SetRange("Effective Date", payelement."Effective Date");
+                    if payelement1.FindSet() then
                         repeat
+                            Clear(salaryline);
                             salaryline.Init();
                             salaryline."Document No." := Rec."No.";
                             salaryline."Line No." := LineNo;
-                            salaryline."Employee No." := payelement."Employee No.";
-                            salaryline."pay Element Code" := payelement."Pay Element Code";
-                            salaryline.Discription := payelement.Discription;
-                            salaryline.Amount := payelement.Amount;
+                            salaryline."Employee No." := payelement1."Employee No.";
+                            salaryline."pay Element Code" := payelement1."Pay Element Code";
+                            salaryline.Discription := payelement1.Discription;
+                            salaryline.Amount := payelement1.Amount;
                             LineNo += 10000;
                             salaryline.Insert();
-                        until payelement.Next() = 0;
+                        until payelement1.Next() = 0;
                     Message('Employee No %1 is inserted', SalaryLine."Employee No.");
                 end;
             }
         }
     }
+    trigger OnAfterGetCurrRecord()
     var
-     editable :Boolean;
-    
+        myInt: Integer;
+    begin
+        if Rec.Status = Rec.Status::Released then
+        Fieldeditable := false;
+        if Rec.Status = Rec.Status::Open then
+        Fieldeditable := true;
+    end;
+
+    var
+        Fieldeditable: Boolean;
 }

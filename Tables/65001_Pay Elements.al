@@ -2,7 +2,8 @@ table 65001 "PayElements6"
 {
     Caption = 'PayElements';
     DataClassification = CustomerContent;
-
+    LookupPageId = PayElementsList6;
+    DrillDownPageId = PayElementsList6;
     fields
     {
         field(1; "Employee No."; Code[20])

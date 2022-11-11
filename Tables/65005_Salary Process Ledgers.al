@@ -2,6 +2,8 @@ table 65005 "Salary Process Ledger6"
 {
     Caption = 'Salary Process Ledger';
     DataClassification = CustomerContent;
+    LookupPageId = "Salary Ledger Entries6";
+    DrillDownPageId = "Salary Ledger Entries6";
 
     fields
     {

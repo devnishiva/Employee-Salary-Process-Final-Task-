@@ -2,7 +2,8 @@ table 65006 "Posted Salary Process Header6"
 {
     Caption = 'Posted Salary Process Header';
     DataClassification = CustomerContent;
-
+    LookupPageId = "Posted Salary Process Order6";
+    DrillDownPageId = "Posted Salary Process Order6";
     fields
     {
         field(1; "No."; Code[20])

@@ -2,7 +2,7 @@ table 65004 "Salary Process Line6"
 {
     Caption = 'Salary Process Line';
     DataClassification = CustomerContent;
-
+    
 
     fields
     {
