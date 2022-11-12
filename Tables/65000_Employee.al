@@ -12,7 +12,6 @@ table 65000 Employee6
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
-            Editable = false;
         }
         field(2; "First Name"; Text[30])
         {
