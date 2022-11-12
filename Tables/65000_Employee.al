@@ -5,13 +5,14 @@ table 65000 Employee6
     DataCaptionFields = "No.", "First Name";
     LookupPageId = EmployeesList6;
     DrillDownPageId = EmployeesList6;
-
+    
     fields
     {
         field(1; "No."; Code[20])
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
+            Editable = false;
         }
         field(2; "First Name"; Text[30])
         {
@@ -78,6 +79,7 @@ table 65000 Employee6
             Caption = 'Phone No.';
             DataClassification = CustomerContent;
             ExtendedDatatype = PhoneNo;
+
         }
         field(14; "E-mail"; Text[80])
         {
